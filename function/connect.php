@@ -7,16 +7,16 @@ $password = "";
 $dbName = "login";
 
 try {
-    // 创建 PDO 连接
+    // 創建 PDO 連接
     $dsn = "mysql:host=$server;dbname=$dbName";
     $options = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // 启用异常模式
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // 设置默认的获取模式
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // 啟用異常模式
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // 設置默認的獲取模式
     ];
 
     $connect = new PDO($dsn, $userName, $password, $options);
-    // echo "连接成功"; // 连接成功的消息可以去掉以防止在实际环境中泄漏信息
+    // echo "連接成功"; // 連接成功的消息可以去掉以防止在實際環境中洩漏訊息
 } catch (PDOException $e) {
-    die("连接失败: " . $e->getMessage());
+    die("連接失敗: " . $e->getMessage());
 }
 ?>
