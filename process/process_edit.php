@@ -15,7 +15,7 @@ if (empty($player) || empty($team) || empty($position) || empty($height) || empt
     exit();
 } else {
     try {
-        // 使用预处理语句更新数据
+        // 使用預處理語句更新數據
         $stmt = $connect->prepare("UPDATE nba SET player = :player, team = :team, position = :position, height = :height, country = :country WHERE id = :id");
         $stmt->execute([
             'player' => $player,
@@ -29,7 +29,7 @@ if (empty($player) || empty($team) || empty($position) || empty($height) || empt
         header("location: " . BASE_URL . 'dashboard.php?page=home&status=success');
         exit();
     } catch (PDOException $e) {
-        die("更新失败: " . $e->getMessage());
+        die("Update failed: " . $e->getMessage());
     }
 }
 ?>

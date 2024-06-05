@@ -17,6 +17,6 @@ try {
     $connect = new PDO($dsn, $userName, $password, $options);
     // echo "連接成功"; // 連接成功的消息可以去掉以防止在實際環境中洩漏訊息
 } catch (PDOException $e) {
-    die("連接失敗: " . $e->getMessage());
+    die("Connection failed: " . $e->getMessage());
 }
 ?>

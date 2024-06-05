@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
+  background-color: #DEDEBE;
 }
 
 .topbar {
@@ -26,7 +27,7 @@ form {
   -webkit-box-shadow: -3px -7px 31px 13px rgba(0, 0, 0, 0.07);
   -moz-box-shadow: -3px -7px 31px 13px rgba(0, 0, 0, 0.07);
   width: 27%;
-  background: white;
+  background: #D6D6AD;
   padding: 1em;
   border-radius: 10px;
   position: absolute;
@@ -40,9 +41,9 @@ form {
 .card-header {
   text-align: center;
   font-size: 25px;
-  border-bottom: 1px solid #0099ff;
+  border-bottom: 1px solid 	#20201e;
   padding: 0.5em;
-  color: #0099ff;
+  color: 	#79793e;
 }
 
 .card-body {
@@ -54,22 +55,23 @@ form.form-login {
   width: 100%;
 }
 
+
 input.form-input {
   padding: 1em;
   border-radius: 50px;
   /* border: none; */
-  border: 1px solid #0099ff;
+  border: 1px solid #20201e;
 }
 
 label.form-label {
-  color: #0099ff;
+  color: #20201e;
   padding: 0.5em;
   margin-top: 0.5em;
 }
 
 button.btn.btn-login {
   width: 100%;
-  background-color: #0099ff;
+  background-color: #686854;
   border: none;
   padding: 1em;
   border-radius: 50px;

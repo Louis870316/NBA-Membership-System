@@ -13,7 +13,7 @@ try {
     $stmt = $connect->query("SELECT * FROM nba");
     $nba = $stmt->fetchAll();
 } catch (PDOException $e) {
-    die("查询失败: " . $e->getMessage());
+    die("Query failed: " . $e->getMessage());
 }
 ?>
 

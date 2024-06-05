@@ -21,7 +21,7 @@ try {
     $stmt->execute(['id' => $id]);
     $nba = $stmt->fetch();
 } catch (PDOException $e) {
-    die("查询失败: " . $e->getMessage());
+    die("Query failed: " . $e->getMessage());
 }
 
 $error = isset($_GET['emptyform']) ? $_GET['emptyform'] : false;
@@ -35,7 +35,7 @@ $error = isset($_GET['emptyform']) ? $_GET['emptyform'] : false;
 <?php endif; ?>
 
 <div class="row">
-  <h1 style="text-align: center; color: #185ADB;">Form Edit</h1>
+  <h1 style="text-align: center; color: #5B5B5B;">Form Edit</h1>
 </div>
 <form method="POST" action="<?= BASE_URL . 'process/process_edit.php' ?>">
   <input type="hidden" name="id" value="<?= htmlspecialchars($nba['id'], ENT_QUOTES, 'UTF-8') ?>">
@@ -59,5 +59,5 @@ $error = isset($_GET['emptyform']) ? $_GET['emptyform'] : false;
     <label for="country" class="form-label">Country</label>
     <input type="text" class="form-control" id="country" name="country" value="<?= htmlspecialchars($nba['country'], ENT_QUOTES, 'UTF-8') ?>">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn" style="background: #B9B973;">Submit</button>
 </form>

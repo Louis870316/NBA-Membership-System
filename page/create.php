@@ -10,6 +10,9 @@ $process = isset($_GET['process']) ? ($_GET['process']) : false;
 </div>
 <?php endif; ?>
 
+<div class="row">
+  <h1 style="text-align: center; color: #5B5B5B;">Create players</h1>
+</div>
 <form method="POST" action="<?= BASE_URL . 'process/process_add.php' ?>">
   <div class="mb-3">
     <label for="player" class="form-label">Player</label>
@@ -31,5 +34,5 @@ $process = isset($_GET['process']) ? ($_GET['process']) : false;
     <label for="country" class="form-label">Country</label>
     <input type="text" class="form-control" id="country" name="country">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn" style="background: #B9B973;">Submit</button>
 </form>

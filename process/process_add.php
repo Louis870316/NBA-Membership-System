@@ -14,7 +14,7 @@ if (empty($player) || empty($team) || empty($position) || empty($height) || empt
     exit();
 } else {
     try {
-        // 使用预处理语句插入数据
+        // 使用預處理語句插入數據
         $stmt = $connect->prepare("INSERT INTO nba (player, height, country, position, team) VALUES (:player, :height, :country, :height, :team)");
         $stmt->execute([
             'player' => $player,
@@ -27,7 +27,7 @@ if (empty($player) || empty($team) || empty($position) || empty($height) || empt
         header("location: " . BASE_URL . 'dashboard.php?page=home&process=success');
         exit();
     } catch (PDOException $e) {
-        die("插入失败: " . $e->getMessage());
+        die("Insertion failed: " . $e->getMessage());
     }
 }
 ?>
