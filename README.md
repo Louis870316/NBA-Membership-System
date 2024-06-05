@@ -48,9 +48,9 @@
      $connect = new PDO($dsn, $userName, $password, $options);
 
      // 檢查連接
-    catch (PDOException $e) {
+     catch (PDOException $e) {
            die("連接失敗: " . $e->getMessage());
-    }
+     }
      ?>
      ```
 
