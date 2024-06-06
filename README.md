@@ -53,6 +53,7 @@ if (password_verify($enteredPassword, $row['password'])) {
     header("Location: index.php?process=failedlogin");
     exit();
 }
+```
 
 ## Installation and Running
 1. **Install XAMPP**
