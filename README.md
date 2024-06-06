@@ -4,7 +4,7 @@
 ![Index text](https://img.onl/y5eNGZ)
 
 ## 專案簡介
-這是一個簡單的會員系統，允許用戶註冊、登入，並管理 NBA 相關的數據。功能包括新增、刪除、查詢和修改球員信息。
+這是一個使用 PHP 和 MariaDB 建立的會員系統，包含會員註冊、登入和 NBA 球員資料的新增、查詢、更新、刪除（CRUD）功能。前端使用 HTML 和 CSS 實現。
 
 ## 功能描述
 1. **會員登入系統**
@@ -16,7 +16,7 @@
 
 ## 使用技術
 - **後端**：PHP （版本 8.0.30）
-- **資料庫**：MySQL 
+- **資料庫**：MariaDB 
 - **前端**：HTML, CSS
 - **開發環境**：XAMPP（版本 3.3.0，啟用 Apache 和 MySQL）
 
@@ -36,38 +36,11 @@
 3. **配置資料庫**
    - 打開瀏覽器，訪問 `http://localhost/phpmyadmin`。
    - 創建一個新的資料庫，例如 `nba_membership`。
-   - 導入專案中的資料庫結構（通常是一個 `.sql` 文件）。
+   - 導入專案中的資料庫結構。
 
-4. **更新資料庫連接設置**
-   - 在專案的 `function/connect.php` 文件中，更新資料庫連接配置：
-     ```php
-     <?php
-     // connect.php
-
-     $server = "localhost";
-     $userName = "root";
-     $password = "";
-     $dbName = "nba_membership";
-
-     try {
-         // 創建 PDO 連接
-         $dsn = "mysql:host=$server;dbname=$dbName";
-         $options = [
-             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // 啟用異常模式
-             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // 設置默認的獲取模式
-         ];
-
-         $connect = new PDO($dsn, $userName, $password, $options);
-         // echo "連接成功"; // 連接成功的消息可以去掉以防止在實際環境中洩漏訊息
-     } catch (PDOException $e) {
-         die("連接失敗: " . $e->getMessage());
-     }
-     ?>
-     ```
-
-5. **運行專案**
+4. **運行專案**
    - 打開瀏覽器，訪問 `http://localhost/your-repository-name`。
-   - 你應該能夠看到登入頁面，並進行註冊、登入和管理 NBA 球員信息。
+   - 能夠看到登入頁面，並進行註冊、登入和管理 NBA 球員信息。
 
 ## 使用說明
 - **註冊**：訪問註冊頁面，輸入必要的信息創建一個新帳戶。
