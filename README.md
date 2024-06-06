@@ -1,5 +1,8 @@
 # NBA 會員系統
 
+![Index text](https://img.onl/k1If65)
+![Index text](https://img.onl/y5eNGZ)
+
 ## 專案簡介
 這是一個簡單的會員系統，允許用戶註冊、登入，並管理 NBA 相關的數據。功能包括新增、刪除、查詢和修改球員信息。
 
