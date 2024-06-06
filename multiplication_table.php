@@ -14,6 +14,7 @@ function printMultiplicationTable($rows = 9, $cols = 9) {
 }
 
 // 獲取命令行參數
+
 $arguments = $argv;
 if (count($arguments) == 3) {
     $rows = intval($arguments[1]);
