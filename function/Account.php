@@ -71,5 +71,11 @@ class Account {
         $stmt->execute([':username' => $username]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-}
 
+     public function getPlayerById($id) {
+        $sql = "SELECT * FROM nba WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+}

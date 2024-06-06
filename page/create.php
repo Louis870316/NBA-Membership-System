@@ -11,7 +11,7 @@ require_once('function/helper.php');
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-4">
-      <h1 class="text-center" style="color: #5B5B5B;">Create players</h1>
+      <h1 class="text-center" style="color: #5B5B5B;">Create player</h1>
       <form method="POST" action="<?= BASE_URL . 'process/process_add.php' ?>" style="transform: scale(0.9); transform-origin: top center;">
         <div class="mb-3">
           <label for="player" class="form-label">Player</label>

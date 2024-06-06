@@ -31,4 +31,3 @@ try {
 } catch (PDOException $e) {
     die("Update failed: " . $e->getMessage());
 }
-

@@ -48,6 +48,7 @@ try {
                                 <td>
                                     <a href="process/process_delete.php?id=<?= $player['id'] ?>" class="btn btn-danger">Delete</a>
                                     <a href="dashboard.php?page=edit&id=<?= $player['id'] ?>" class="btn btn-info">Edit</a>
+                                    <a href="dashboard.php?page=detail&id=<?= $player['id'] ?>" class="btn btn-success">Detail</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -38,4 +38,3 @@ if (empty($player) || empty($team) || empty($position) || empty($height) || empt
         die("Insertion failed: " . $e->getMessage());
     }
 }
-

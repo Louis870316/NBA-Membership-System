@@ -45,7 +45,7 @@ $error = isset($_GET['emptyform']) ? $_GET['emptyform'] : false;
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-4">
-      <h1 class="text-center" style="color: #5B5B5B;">Form Edit</h1>
+      <h1 class="text-center" style="color: #5B5B5B;">Player Edit</h1>
       <form method="POST" action="<?= BASE_URL . 'process/process_edit.php' ?>">
         <input type="hidden" name="id" value="<?= htmlspecialchars($nba['id'], ENT_QUOTES, 'UTF-8') ?>">
         <div class="mb-3">

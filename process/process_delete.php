@@ -23,4 +23,3 @@ try {
 } catch (PDOException $e) {
     die("failed to delete: " . $e->getMessage());
 }
-
