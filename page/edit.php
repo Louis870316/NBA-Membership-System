@@ -16,6 +16,7 @@ if (!isset($_SESSION['id'])) {
 
 $id = isset($_GET['id']) ? $_GET['id'] : false;
 
+// 用你的MySQL數據庫連接訊息替換
 $host = 'localhost';
 $db = 'login';
 $user = 'root';

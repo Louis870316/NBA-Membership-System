@@ -2,6 +2,7 @@
 require_once('function/Connector.php');
 require_once('function/helper.php');
 
+// 用你的MySQL數據庫連接訊息替換
 $host = 'localhost';
 $db = 'login';
 $user = 'root';
