@@ -22,4 +22,4 @@ if (count($arguments) == 3) {
 } else {
     printMultiplicationTable();
 }
-?>
+

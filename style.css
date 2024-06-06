@@ -41,9 +41,9 @@ form {
 .card-header {
   text-align: center;
   font-size: 25px;
-  border-bottom: 1px solid 	#20201e;
+  border-bottom: 1px solid #20201e;
   padding: 0.5em;
-  color: 	#79793e;
+  color: #79793e;
 }
 
 .card-body {
@@ -54,7 +54,6 @@ form {
 form.form-login {
   width: 100%;
 }
-
 
 input.form-input {
   padding: 1em;

@@ -1,7 +1,15 @@
 <?php
-
+require_once('../function/Connector.php');
 require_once('../function/helper.php');
-require_once('../function/connect.php');
+
+// 用你的MySQL數據庫連接訊息替換
+$host = 'localhost';
+$db = 'login';
+$user = 'root';
+$pass = '';
+
+$connector = new Connector($host, $db, $user, $pass);
+$conn = $connector->getConnection();
 
 $player = $_POST['player'];
 $team = $_POST['team'];
@@ -9,13 +17,13 @@ $position = $_POST['position'];
 $height = $_POST['height'];
 $country = $_POST['country'];
 
-if (empty($player) || empty($team) || empty($position) || empty($height) || empty($country) ) {
-    header("location: " . BASE_URL . 'dashboard.php?page=create&process=failed');
+if (empty($player) || empty($team) || empty($position) || empty($height) || empty($country)) {
+    header("location: " .  base_url('dashboard.php?page=create&process=failed'));
     exit();
 } else {
     try {
         // 使用預處理語句插入數據
-        $stmt = $connect->prepare("INSERT INTO nba (player, height, country, position, team) VALUES (:player, :height, :country, :height, :team)");
+        $stmt = $conn->prepare("INSERT INTO nba (player, team, position, height, country) VALUES (:player, :team, :position, :height, :country)");
         $stmt->execute([
             'player' => $player,
             'team' => $team,
@@ -24,10 +32,10 @@ if (empty($player) || empty($team) || empty($position) || empty($height) || empt
             'country' => $country
         ]);
 
-        header("location: " . BASE_URL . 'dashboard.php?page=home&process=success');
+        header("location: " .  base_url('dashboard.php?page=home&process=success'));
         exit();
     } catch (PDOException $e) {
         die("Insertion failed: " . $e->getMessage());
     }
 }
-?>
+

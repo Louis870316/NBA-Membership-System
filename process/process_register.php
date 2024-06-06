@@ -1,40 +1,42 @@
 <?php
-
+require_once('../function/Connector.php');
+require_once('../function/Account.php');
 require_once('../function/helper.php');
-require_once('../function/connect.php');
 
-$userName = $_POST['username'];
-$password = $_POST['password'];
-$repassword = $_POST['repassword'];
+$host = 'localhost';
+$db = 'login';
+$user = 'root';
+$pass = '';
 
-if (empty($userName) || empty($password) || empty($repassword)) {
-    header("location: " . BASE_URL . 'register.php?process=failedempty');
+$connector = new Connector($host, $db, $user, $pass);
+$account = new Account($connector);
+
+if (!isset($_POST['username']) || !isset($_POST['password']) || !isset($_POST['repassword'])) {
+    die("Username or password not provided");
+}
+
+$userName = trim($_POST['username']);
+$password = trim($_POST['password']);
+$repassword = trim($_POST['repassword']);
+
+if ($password !== $repassword) {
+    header("Location: " .  base_url('register.php?process=failedpassword'));
     exit();
-} else {
-    if ($password != $repassword) {
-        header("location: " . BASE_URL . 'register.php?process=failedpassword');
+}
+
+try {
+    $existingUser = $account->getUserByUsername($userName);
+
+    if ($existingUser) {
+        header("Location: " .  base_url('register.php?process=failedusername'));
         exit();
     } else {
-        try {
-            // 檢查用戶名是否存在
-            $stmt = $connect->prepare("SELECT * FROM users WHERE username = :username");
-            $stmt->execute(['username' => $userName]);
-            if ($stmt->rowCount() != 0) {
-                header("location: " . BASE_URL . 'register.php?process=failedusername');
-                exit();
-            } else {
-                // 使用 password_hash 函數加密密碼
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-                // 插入新用戶
-                $stmt = $connect->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
-                $stmt->execute(['username' => $userName, 'password' => $hashedPassword]);
-                header("location: " . BASE_URL . 'index.php?process=successregister');
-                exit();
-            }
-        } catch (PDOException $e) {
-            die("數據庫操作失敗: " . $e->getMessage());
-        }
+        $account->createAccount($userName, $password); 
+        header("Location: " .  base_url('index.php?process=successregister'));
+        exit();
     }
+
+} catch (PDOException $e) {
+    die("Query failed: " . $e->getMessage());
 }
-?>
+
