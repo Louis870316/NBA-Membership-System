@@ -1,77 +1,82 @@
-# NBA 會員系統
+# NBA Membership System
 
 ![Index text](https://img.onl/k1If65)
 ![Index text](https://img.onl/y5eNGZ)
 
-## 專案簡介
-這是一個使用 PHP 和 MariaDB 建立的會員系統，包含會員註冊、登入和 NBA 球員資料CRUD功能。前端使用 HTML 和 CSS 實現。
+## Project Overview
+This is a membership system built using PHP and MariaDB, featuring member registration, login, and CRUD functionalities for NBA player data. The frontend is implemented using HTML and CSS.
 
-## 功能描述
-1. **會員登入系統**
-   - 用戶可以通過註冊頁面創建一個新帳戶。
-   - 註冊成功後，用戶可以登入系統。
-   - 登入後，用戶可以在一個表格中管理 NBA 相關的數據。
-   - 數據包括球員姓名、所屬球隊、位置、身高和國家。
-   - 用戶可以新增、刪除、瀏覽和修改這些數據。
+## Features
+  **Member Login System**
+   - Users can create a new account through the registration page.
+   - After successful registration, users can log in to the system.
+   - Once logged in, users can manage NBA-related data in a table.
+   - Data includes player name, team, position, height, and country.
+   - Users can add, delete, view, and modify this data.
 
-## 使用技術
-- **後端**：PHP （版本 8.0.30）
-- **資料庫**：MariaDB 
-- **前端**：HTML, CSS
-- **開發環境**：XAMPP（版本 3.3.0，啟用 Apache 和 MySQL）
-- **密碼加密**：使用 `password_hash()` 函數對密碼進行bcrypt加密，並在驗證時使用 `password_verify()` 函數進行匹配。
-- **資料庫連接**：使用 PDO（PHP Data Objects）來連接資料庫，並啟用預處理語句以防止SQL注入攻擊。
-- **面向對象設計**：使用 PHP 類 (Class) 來設計程式碼。`Connector` 類負責資料庫連接，`Account` 類負責管理用戶帳戶和 NBA 球員數據，包括新增、刪除、更新和查詢功能。
+## Technologies Used
+- **Backend**: PHP (version 8.0.30)
+- **Database**: MariaDB
+- **Frontend**: HTML, CSS
+- **Development Environment**: XAMPP (version 3.3.0, with Apache and MySQL enabled)
+- **Password Encryption**: Uses the `password_hash()` function for bcrypt encryption, and the `password_verify()` function for password verification.
+- **Database Connection**: Utilizes PDO (PHP Data Objects) for database connection, and enables prepared statements to prevent SQL injection.
+- **Object-Oriented Design**: PHP classes are used to design the code. The `Connector` class handles the database connection, and the `Account` class manages user accounts and NBA player data, including creation, deletion, updating, and retrieval.
 
-### 密碼加密示例
+### Password Encryption Example
 
-在用戶註冊和登入過程中，使用bcrypt算法來處理密碼加密和驗證。以下是在PHP中的實現示例：
+During user registration and login, bcrypt algorithm is used for password hashing and verification. Below is the implementation example in PHP:
 
 ```php
-// 註冊時加密密碼
+// Password hashing during registration
 $password = trim($_POST['password']);
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-// 儲存加密後的密碼到資料庫
+// Storing the hashed password in the database
 $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
 $stmt->execute(['username' => $username, 'password' => $hashedPassword]);
 
-// 登入時驗證密碼
+// Password verification during login
 $enteredPassword = trim($_POST['password']);
 $stmt = $pdo->prepare("SELECT password FROM users WHERE username = :username");
 $stmt->execute(['username' => $username]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (password_verify($enteredPassword, $row['password'])) {
-    // 密碼驗證成功
+    // Password verification successful
+    session_start();
+    $_SESSION['id'] = $row['id'];
+    header("Location: dashboard.php");
+    exit();
 } else {
-    // 密碼驗證失敗
+    // Password verification failed
+    header("Location: index.php?process=failedlogin");
+    exit();
 }
-```
 
-## 安裝和運行
-1. **安裝 XAMPP**
-   - 下載並安裝 [XAMPP](https://www.apachefriends.org/index.html)。
-   - 啟動 XAMPP 控制面板，並啟動 Apache 和 MySQL 服務。
+## Installation and Running
+1. **Install XAMPP**
+   - Download and install [XAMPP](https://www.apachefriends.org/index.html)。
+   - Start the XAMPP control panel and enable Apache and MySQL services.
 
-2. **克隆專案**
-   - 打開終端或命令提示符，導航到你的 Web 伺服器根目錄（例如，`C:\xampp\htdocs`）。
-   - 克隆專案代碼庫：
+2. **Clone the Project**
+   - Open a terminal or command prompt and navigate to your web server root directory (e.g., C:\\xampp\\htdocs).
+   - Clone the project repository:
      ```sh
      git clone https://github.com/yourusername/your-repository-name.git
      ```
-   - 或者將專案文件手動複製到 `htdocs` 目錄中。
+   - Alternatively, manually copy the project files into the htdocs directory.
 
-3. **配置資料庫**
-   - 打開瀏覽器，訪問 `http://localhost/phpmyadmin`。
-   - 創建一個新的資料庫，例如 `nba_membership`。
-   - 導入專案中的資料庫結構。
+3. **Configure the Database**
+   - Open a browser and visit `http://localhost/phpmyadmin`.
+   - Create a new database, for example, `nba_membership`.
+   - Import the database structure from the project.
 
-4. **運行專案**
-   - 打開瀏覽器，訪問 `http://localhost/your-repository-name`。
-   - 能夠看到登入頁面，並進行註冊、登入和管理 NBA 球員信息。
+4. **Run the Project**
+   - Open a browser and visit `http://localhost/your-repository-name`.
+   - You should see the login page, where you can register, log in, and manage NBA player information.
 
-## 使用說明
-- **註冊**：訪問註冊頁面，輸入必要的信息創建一個新帳戶。
-- **登入**：使用註冊時的用戶名和密碼登入系統。
-- **管理數據**：登入後，你可以在表格中新增、刪除、查詢和修改球員信息。
+## Usage Instructions
+- **Register**：Visit the registration page and enter the required information to create a new account.
+- **Log In**：Log in to the system using the username and password created during registration.
+- **Manage Data**：After logging in, you can add, delete, view, and modify player information in the table.
