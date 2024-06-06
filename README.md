@@ -4,7 +4,7 @@
 ![Index text](https://img.onl/y5eNGZ)
 
 ## 專案簡介
-這是一個使用 PHP 和 MariaDB 建立的會員系統，包含會員註冊、登入和 NBA 球員資料的新增、查詢、更新、刪除（CRUD）功能。前端使用 HTML 和 CSS 實現。
+這是一個使用 PHP 和 MariaDB 建立的會員系統，包含會員註冊、登入和 NBA 球員資料CRUD功能。前端使用 HTML 和 CSS 實現。
 
 ## 功能描述
 1. **會員登入系統**
@@ -19,6 +19,35 @@
 - **資料庫**：MariaDB 
 - **前端**：HTML, CSS
 - **開發環境**：XAMPP（版本 3.3.0，啟用 Apache 和 MySQL）
+- **密碼加密**：使用 `password_hash()` 函數對密碼進行bcrypt加密，並在驗證時使用 `password_verify()` 函數進行匹配。
+- **資料庫連接**：使用 PDO（PHP Data Objects）來連接資料庫，並啟用預處理語句以防止SQL注入攻擊。
+- **面向對象設計**：使用 PHP 類 (Class) 來設計程式碼。`Connector` 類負責資料庫連接，`Account` 類負責管理用戶帳戶和 NBA 球員數據，包括新增、刪除、更新和查詢功能。
+
+### 密碼加密示例
+
+在用戶註冊和登入過程中，使用bcrypt算法來處理密碼加密和驗證。以下是在PHP中的實現示例：
+
+```php
+// 註冊時加密密碼
+$password = trim($_POST['password']);
+$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+// 儲存加密後的密碼到資料庫
+$stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+$stmt->execute(['username' => $username, 'password' => $hashedPassword]);
+
+// 登入時驗證密碼
+$enteredPassword = trim($_POST['password']);
+$stmt = $pdo->prepare("SELECT password FROM users WHERE username = :username");
+$stmt->execute(['username' => $username]);
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (password_verify($enteredPassword, $row['password'])) {
+    // 密碼驗證成功
+} else {
+    // 密碼驗證失敗
+}
+```
 
 ## 安裝和運行
 1. **安裝 XAMPP**
